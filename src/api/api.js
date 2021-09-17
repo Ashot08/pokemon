@@ -13,7 +13,14 @@ export const pokemonApi = {
             }
         );
     },
-    getPokemon(url){
+    getPokemonById(id){
+        return instance.get(`pokemon/${id}`).then(
+            response => {
+                return response.data;
+            }
+        );
+    },
+    getPokemonByUrl(url){
         return axios.get(url).then(
             response => {
                 return response.data;
