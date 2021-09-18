@@ -10,8 +10,7 @@ export const Pokemons = (props) => {
     const [count, setCount] = useState();
     const [pokemonURLs, setPokemonURLs] = useState([]);
     const [pokemon, setPokemon] = useState(0);
-    const [currentPage, setCurrentPage] = useState(props.currentPage || 0);
-    const [offset, setOffset] = useState( props.currentPage * limit);
+    const [currentPage, setCurrentPage] = useState(0);
     const getPokemonUrls = (offset, limit) => {
         pokemonApi.getPokemons(offset, limit).then(
             data => {
@@ -20,11 +19,15 @@ export const Pokemons = (props) => {
             }
         );
     }
+    useEffect(() => {
+        setCurrentPage(+props.currentPage || 0);
+    },[props.currentPage]);
 
     useEffect(() => {
+        const offset = currentPage * limit
         getPokemonUrls(offset, limit);
-        setCurrentPage(offset/limit);
-    }, [offset]);
+    }, [currentPage]);
+
     useEffect(() => {
         const pokemonArray = [];
         pokemonURLs.forEach(p => {
@@ -47,18 +50,11 @@ export const Pokemons = (props) => {
                 }
             </div>
             <div>
-                <Link to={`/${currentPage}`}>
-                    <button disabled={currentPage <= 0} onClick={() => {
-                        if (offset > 0) {
-                            setOffset(prev => prev - limit)
-                        }
-                    }
-                    }> {'<-'}
-                    </button>
-                    <button disabled={offset + count%limit >= count} onClick={() => {
-                        setOffset(prev => prev + limit)
-                    }}> {'->'}
-                    </button>
+                <Link to={`/${+currentPage - 1}`}>
+                    <button disabled={currentPage <= 0}> {'<-'}</button>
+                </Link>
+                <Link to={`/${+currentPage + 1}`}>
+                    <button disabled={currentPage*limit + count%limit >= count}> {'->'}</button>
                 </Link>
             </div>
         </div>
