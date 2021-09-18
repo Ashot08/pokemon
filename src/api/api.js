@@ -26,5 +26,12 @@ export const pokemonApi = {
                 return response.data;
             }
         );
-    }
+    },
+    getByUrl(url){
+        return axios.get(url).then(
+            response => {
+                return response.data;
+            }
+        );
+    },
 }

@@ -1,0 +1,11 @@
+.card{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 40px;
+}
+.card__left{
+
+}
+.image__wrapper{
+    padding: 20px;
+}

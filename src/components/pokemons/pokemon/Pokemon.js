@@ -1,4 +1,4 @@
-import classes from './Pokemon.modules.css';
+import classes from './Pokemon.module.css';
 import {Link} from "react-router-dom";
 export const Pokemon = (props) => {
     return (
