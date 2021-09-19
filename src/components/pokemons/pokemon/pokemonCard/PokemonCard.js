@@ -4,7 +4,8 @@ import classes from './PokemonCard.module.css';
 
 export const PokemonCard = (props) => {
     const [pokemon, setPokemon] = useState(0);
-    const [descriptions, setDescriptions] = useState('...')
+    const [descriptions, setDescriptions] = useState('...');
+    const [currentVersion, setCurrentVersion] = useState(0);
     useEffect(()=>{
         pokemonApi.getPokemonById(props.id).then(
             data => setPokemon(data)
@@ -16,7 +17,7 @@ export const PokemonCard = (props) => {
                 data => {
                     const engDescriptions = data.flavor_text_entries
                         .filter(a=>a.language.name === 'en')
-                        .map(d => <div><h2>{d.version.name}</h2><p>{d.flavor_text}</p></div>);
+                        .map((d,i) => <div key={i}><h2>{d.version.name}</h2><p>{d.flavor_text}</p></div>);
 
                     setDescriptions(engDescriptions);
                 }
@@ -33,8 +34,13 @@ export const PokemonCard = (props) => {
             </div>
             <div>
                 <h2>{pokemon.name}</h2>
-                <p>{descriptions}</p>
+                <div>{descriptions[currentVersion || 0]}</div>
+                <div>
+                    <button disabled={currentVersion === 0} onClick={() => setCurrentVersion(v => v - 1)}>prev</button>
+                    <button disabled={currentVersion === descriptions.length - 1} onClick={() => setCurrentVersion(v => v + 1)}>next</button>
+                </div>
             </div>
         </div>
     </>
 }
+
