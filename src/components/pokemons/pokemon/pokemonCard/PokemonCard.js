@@ -34,11 +34,17 @@ export const PokemonCard = (props) => {
             </div>
             <div>
                 <h2>{pokemon.name}</h2>
+
                 <div>{descriptions[currentVersion || 0]}</div>
                 <div>
                     <button disabled={currentVersion === 0} onClick={() => setCurrentVersion(v => v - 1)}>prev</button>
                     <button disabled={currentVersion === descriptions.length - 1} onClick={() => setCurrentVersion(v => v + 1)}>next</button>
                 </div>
+                <div>
+                    <p>Height: {+pokemon.height/10 || '...'} m</p>
+                    <p>Weight: {+pokemon.weight/10 || '...'} kg</p>
+                </div>
+
             </div>
         </div>
     </>
