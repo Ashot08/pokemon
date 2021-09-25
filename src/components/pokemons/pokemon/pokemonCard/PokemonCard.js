@@ -1,14 +1,20 @@
 import {useEffect, useState} from "react";
 import {pokemonApi} from "../../../../api/api";
 import classes from './PokemonCard.module.css';
+import {Preloader} from "../../../common/Preloader";
 
 export const PokemonCard = (props) => {
     const [pokemon, setPokemon] = useState(0);
     const [descriptions, setDescriptions] = useState('...');
     const [currentVersion, setCurrentVersion] = useState(0);
+    const [preloader, setPreloader] = useState(false);
     useEffect(()=>{
+        setPreloader(true);
         pokemonApi.getPokemonById(props.id).then(
-            data => setPokemon(data)
+            data => {
+                setPokemon(data);
+                setPreloader(false);
+            }
         )
     },[props.id]);
     useEffect(()=>{
@@ -26,6 +32,7 @@ export const PokemonCard = (props) => {
     }, [pokemon]);
 
     return <>
+        {preloader ? <Preloader /> :
         <div className={classes.card}>
             <div className={classes.card__left}>
                 <div className={classes.image__wrapper}>
@@ -44,9 +51,9 @@ export const PokemonCard = (props) => {
                     <p>Height: {+pokemon.height/10 || '...'} m</p>
                     <p>Weight: {+pokemon.weight/10 || '...'} kg</p>
                 </div>
-
             </div>
         </div>
+        }
     </>
 }
 

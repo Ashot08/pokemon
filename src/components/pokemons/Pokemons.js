@@ -3,13 +3,14 @@ import {Pokemon} from "./pokemon/Pokemon";
 import {pokemonApi} from "../../api/api";
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import {Preloader} from "../common/Preloader";
 
 
 export const Pokemons = (props) => {
     const limit = 8;
     const [count, setCount] = useState();
     const [pokemonURLs, setPokemonURLs] = useState([]);
-    const [pokemon, setPokemon] = useState(0);
+    //const [pokemon, setPokemon] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
     const getPokemonUrls = (offset, limit) => {
         pokemonApi.getPokemons(offset, limit).then(
@@ -28,25 +29,13 @@ export const Pokemons = (props) => {
         getPokemonUrls(offset, limit);
     }, [currentPage]);
 
-    useEffect(() => {
-        const pokemonArray = [];
-        pokemonURLs.forEach(p => {
-            pokemonApi.getPokemonByUrl(p.url).then(
-                data => {
-                    pokemonArray.push(data);
-                    setPokemon(pokemonArray.slice());
-                }
-            )
-        });
-        setPokemon(pokemon);
-    }, [pokemonURLs]);
     return (
         <div>
             <div className={classes.pokemons}>
                 {
-                    pokemon ? pokemon.map(p => {
-                        return <Pokemon key={p.id} id={p.id} name={p.name} imgUrl={p.sprites.other['official-artwork'].front_default}/>
-                    }) : 'not found'
+                    pokemonURLs ? pokemonURLs.map(p => {
+                    return <Pokemon key={p.name} url={p.url}/>
+                }) : 'not found'
                 }
             </div>
             <div>
