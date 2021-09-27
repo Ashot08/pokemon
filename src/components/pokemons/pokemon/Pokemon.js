@@ -5,13 +5,11 @@ import {pokemonApi} from "../../../api/api";
 import {Preloader} from "../../common/Preloader";
 export const Pokemon = (props) => {
     const [pokemon, setPokemon] = useState(0);
-    const [preloader, setPreloader] = useState(false);
+
     useEffect(() => {
-        setPreloader(true);
         pokemonApi.getPokemonByUrl(props.url).then(
             data => {
                 setPokemon(data);
-                setPreloader(false);
             }
         )
     }, [props.url])

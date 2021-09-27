@@ -20,6 +20,7 @@ export const pokemonApi = {
             }
         );
     },
+
     getPokemonByUrl(url){
         return axios.get(url).then(
             response => {

@@ -3,8 +3,6 @@ import {Pokemon} from "./pokemon/Pokemon";
 import {pokemonApi} from "../../api/api";
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import {Preloader} from "../common/Preloader";
-
 
 export const Pokemons = (props) => {
     const limit = 8;
@@ -47,6 +45,5 @@ export const Pokemons = (props) => {
                 </Link>
             </div>
         </div>
-
     )
 }
