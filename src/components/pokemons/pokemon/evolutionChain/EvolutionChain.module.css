@@ -1,0 +1,23 @@
+.evolution_chain{
+    display: grid;
+    align-items: center;
+    grid-gap: 20px;
+}
+.chain_item{
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    padding: 20px;
+}
+.chain_item::before{
+    content: '->';
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 0;
+    top: calc(50% - 15px);
+    text-align: right;
+}
+.chain_item:last-child::before{
+    display: none;
+}

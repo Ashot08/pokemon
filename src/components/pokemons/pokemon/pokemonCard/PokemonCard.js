@@ -52,7 +52,10 @@ export const PokemonCard = (props) => {
                 </div>
             </div>
             <div>abilities</div>
-            <EvolutionChain speciesURL={pokemon.species.url} />
+            <div>
+                <h3>Evolution Chain</h3>
+                <EvolutionChain speciesURL={pokemon.species.url} />
+            </div>
         </div>
             : <Preloader />
         }
