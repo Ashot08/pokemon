@@ -43,8 +43,8 @@ export const EvolutionChain = (props) => {
 
 function addPokemonToChainList(currentLinks, pokemonArray, i = 0) {
     i++;
-    pokemonArray.push([]);
     currentLinks.forEach((pokemon) => {
+        if(!pokemonArray[i]) pokemonArray.push([]);
         pokemonArray[i].push({index: i, name: pokemon.species.name});
         if (pokemon.evolves_to.length) addPokemonToChainList(pokemon.evolves_to, pokemonArray, i);
     });

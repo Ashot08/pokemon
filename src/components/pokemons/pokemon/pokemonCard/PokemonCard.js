@@ -51,7 +51,7 @@ export const PokemonCard = (props) => {
                     <p>Weight: {+pokemon.weight/10 || '...'} kg</p>
                 </div>
             </div>
-            <div>abilities</div>
+            <div>{pokemon.stats.map(stat=><div>{stat.stat.name + ' ' + stat.base_stat}</div>)}</div>
             <div>
                 <h3>Evolution Chain</h3>
                 <EvolutionChain speciesURL={pokemon.species.url} />
