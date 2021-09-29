@@ -12,7 +12,7 @@ export const ChainItem = (props) => {
             )
         }
     },[props.name])
-    return pokemon ? <div style={{width: `${props.width}%`}} className={'order-' + props.index}>
+    return pokemon ? <div style={{width: `${props.width}%`}} >
         <Link to={`/card/${pokemon.id}`}>
             <img src={pokemon.sprites.other['official-artwork'].front_default} alt={'pokemon image'} />
             {pokemon.name}

@@ -32,7 +32,7 @@ export const EvolutionChain = (props) => {
                 chainLinks ?
                     chainLinks.map((linksArr, i) => <div className={classes.chain_item} key={i}>
                         {linksArr.map((n, index) => <ChainItem
-                            width={linksArr.length > 4 ? 200 / linksArr.length : 100 / linksArr.length} key={n.name}
+                            width={linksArr.length > 3 ? 200 / linksArr.length : 100 } key={n.name}
                             index={n.index} name={n.name}/>)}
                     </div>)
                     : <Preloader/>
