@@ -5,6 +5,8 @@ export const Header = (props) => {
         <header>
             <div className={"container"}>
                 <Link to={'/'}>Home</Link>
+                <Link to={'/fight-scene'}>Fight Scene</Link>
+
             </div>
         </header>
     )

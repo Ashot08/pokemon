@@ -8,7 +8,6 @@ export const Pokemons = (props) => {
     const limit = 8;
     const [count, setCount] = useState();
     const [pokemonURLs, setPokemonURLs] = useState([]);
-    //const [pokemon, setPokemon] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
     const getPokemonUrls = (offset, limit) => {
         pokemonApi.getPokemons(offset, limit).then(
