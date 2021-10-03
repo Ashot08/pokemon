@@ -61,8 +61,8 @@ export const FightScene = (props) => {
             }
         </div>
         <div>
-            <button onClick={() => onResetFighters()}>Сброс</button>
-            <button>В бой</button>
+            <button disabled={!player1.isActive} onClick={() => onResetFighters()}>Reset</button>
+            <button disabled={(!player2.isActive)}>Fight!</button>
         </div>
     </>
 }
