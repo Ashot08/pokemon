@@ -12,3 +12,18 @@
 .fighter:hover{
     border: 1px solid red;
 }
+.fighter{
+    position: relative;
+}
+.player1::before{
+    content: 'player 1';
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.player2::after{
+    content: 'player 2';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}

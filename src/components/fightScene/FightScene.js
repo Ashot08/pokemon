@@ -6,6 +6,30 @@ import classes from './FightScene.module.css';
 export const FightScene = (props) => {
     const limit = 40;
     const [pokemonURLs, setPokemonURLs] = useState([]);
+    const [player1, setPlayer1] = useState({
+        id: null,
+        isActive: false,
+        history: [],
+        points: 0
+    });
+    const [player2, setPlayer2] = useState({
+        id: null,
+        isActive: false,
+        history: [],
+        points: 0
+    });
+
+    function onClickPokemon(id){
+        if(!player1.isActive && !player2.isActive){
+            setPlayer1({...player1, id, isActive: true});
+        }else if(player1.isActive && !player2.isActive){
+            setPlayer2({...player2, id, isActive: true});
+        }
+    }
+    function onResetFighters(){
+        setPlayer1({...player1, id: null, isActive: false});
+        setPlayer2({...player2, id: null, isActive: false});
+    }
     const getPokemonUrls = (offset, limit) => {
         pokemonApi.getPokemons(offset, limit).then(
             data => {
@@ -24,9 +48,21 @@ export const FightScene = (props) => {
         <div className={classes.fighters}>
             {
                 pokemonURLs ? pokemonURLs.map(p => {
-                    return <Fighter key={p.name} url={p.url}/>
+                    return <Fighter
+                        onClick={onClickPokemon}
+                        key={p.name}
+                        url={p.url}
+                        player1Id={player1.id}
+                        player2Id={player2.id}
+                        player1IsActive={player1.isActive}
+                        player2IsActive={player2.isActive}
+                    />
                 }) : 'not found'
             }
+        </div>
+        <div>
+            <button onClick={() => onResetFighters()}>Сброс</button>
+            <button>В бой</button>
         </div>
     </>
 }

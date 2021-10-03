@@ -16,7 +16,11 @@ export const Fighter = (props) => {
     }, [props.url])
     return (
         pokemon ?
-            <div className={classes.fighter}>
+            <div
+                className={[classes.fighter,
+                    pokemon.id === props.player1Id && props.player1IsActive ? classes.player1 : '',
+                    pokemon.id === props.player2Id && props.player2IsActive ? classes.player2 : '' ].join(' ')}
+                onClick={() => props.onClick(pokemon.id)}>
                 <div>
                     <img src={pokemon.sprites.front_default} alt={'pokemon image'}/>
                 </div>
