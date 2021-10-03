@@ -36,10 +36,10 @@ export const Pokemons = (props) => {
                 }
             </div>
             <div>
-                <Link to={`/${+currentPage - 1}`}>
+                <Link to={`/catalog/${+currentPage - 1}`}>
                     <button disabled={currentPage <= 0}> {'<-'}</button>
                 </Link>
-                <Link to={`/${+currentPage + 1}`}>
+                <Link to={`/catalog/${+currentPage + 1}`}>
                     <button disabled={currentPage*limit + count%limit >= count}> {'->'}</button>
                 </Link>
             </div>

@@ -8,9 +8,10 @@ export const Main = (props) => {
     return (
         <main>
             <div className="container">
-                <Route path={'/fight-scene'} render={(props)=><FightScene />} />
-                <Route exact path={'/:page?'} render={(props)=><Pokemons currentPage={props.match.params.page} />} />
+                <Route exact path={'/'} render={(props)=><Pokemons />} />
+                <Route exact path={'/catalog/:page?'} render={(props)=><Pokemons currentPage={props.match.params.page} />} />
                 <Route path={'/card/:id?'} render={(props)=><PokemonCard id={props.match.params.id} />} />
+                <Route path={'/fight-scene/'} render={(props)=><FightScene />} />
             </div>
         </main>
     )

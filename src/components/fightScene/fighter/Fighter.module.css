@@ -1,0 +1,14 @@
+.fighter{
+    width: 5%;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    border-right: 1px solid rgba(0,0,0,0.1);
+}
+.fighter:nth-child(20n + 1) {
+    border-left: 1px solid rgba(0,0,0,0.1);
+}
+.fighter:nth-child(-n+20){
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+.fighter:hover{
+    border: 1px solid red;
+}

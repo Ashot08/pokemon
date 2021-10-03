@@ -1,15 +1,14 @@
 import {useEffect, useState} from "react";
 import {pokemonApi} from "../../api/api";
 import {Fighter} from "./fighter/Fighter";
+import classes from './FightScene.module.css';
 
 export const FightScene = (props) => {
-    const limit = 2;
-    const [count, setCount] = useState();
+    const limit = 40;
     const [pokemonURLs, setPokemonURLs] = useState([]);
     const getPokemonUrls = (offset, limit) => {
         pokemonApi.getPokemons(offset, limit).then(
             data => {
-                setCount(data.count);
                 setPokemonURLs(data.results);
             }
         );
@@ -22,7 +21,7 @@ export const FightScene = (props) => {
 
     return <>
         <div>scene</div>
-        <div>
+        <div className={classes.fighters}>
             {
                 pokemonURLs ? pokemonURLs.map(p => {
                     return <Fighter key={p.name} url={p.url}/>

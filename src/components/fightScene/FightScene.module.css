@@ -1,0 +1,7 @@
+.fight-scene{
+
+}
+.fighters{
+    display: flex;
+    flex-wrap: wrap;
+}
