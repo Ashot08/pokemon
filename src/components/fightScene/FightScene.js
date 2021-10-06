@@ -1,7 +1,8 @@
 import {useEffect, useState} from "react";
 import {pokemonApi} from "../../api/api";
-import {Fighter} from "./fighter/Fighter";
+import {FighterIcon} from "./fighterIcon/FighterIcon";
 import classes from './FightScene.module.css';
+import {Fighters} from "./fighters/Fighters";
 
 export const FightScene = (props) => {
     const limit = 40;
@@ -18,7 +19,9 @@ export const FightScene = (props) => {
         history: [],
         points: 0
     });
-
+    const [game, setGame] = useState({
+        gameMode: false,
+    })
     function onClickPokemon(id){
         if(!player1.isActive && !player2.isActive){
             setPlayer1({...player1, id, isActive: true});
@@ -29,6 +32,12 @@ export const FightScene = (props) => {
     function onResetFighters(){
         setPlayer1({...player1, id: null, isActive: false});
         setPlayer2({...player2, id: null, isActive: false});
+    }
+    function onFight(){
+        setGame({...game, gameMode: true})
+    }
+    function onBack(){
+        setGame({...game, gameMode: false})
     }
     const getPokemonUrls = (offset, limit) => {
         pokemonApi.getPokemons(offset, limit).then(
@@ -44,25 +53,37 @@ export const FightScene = (props) => {
     }, [limit]);
 
     return <>
-        <div>scene</div>
-        <div className={classes.fighters}>
-            {
-                pokemonURLs ? pokemonURLs.map(p => {
-                    return <Fighter
-                        onClick={onClickPokemon}
-                        key={p.name}
-                        url={p.url}
-                        player1Id={player1.id}
-                        player2Id={player2.id}
-                        player1IsActive={player1.isActive}
-                        player2IsActive={player2.isActive}
-                    />
-                }) : 'not found'
-            }
+        <div className={classes.scene}>
+            {game.gameMode ? <Fighters /> : 'Выбери покемонов для боя'}
         </div>
         <div>
-            <button disabled={!player1.isActive} onClick={() => onResetFighters()}>Reset</button>
-            <button disabled={(!player2.isActive)}>Fight!</button>
+
+            {game.gameMode ?
+                <div><button onClick={() => onBack()}>Назад</button></div>
+                :
+                <>
+                    <div className={classes.fighters}>
+                        {
+                            pokemonURLs ? pokemonURLs.map(p => {
+                                return <FighterIcon
+                                    onClick={onClickPokemon}
+                                    key={p.name}
+                                    url={p.url}
+                                    player1Id={player1.id}
+                                    player2Id={player2.id}
+                                    player1IsActive={player1.isActive}
+                                    player2IsActive={player2.isActive}
+                                />
+                            }) : 'not found'
+                        }
+                    </div>
+                    <div>
+                        <button disabled={!player1.isActive} onClick={() => onResetFighters()}>Reset</button>
+                        <button disabled={(!player2.isActive)} onClick={() => onFight()}>Fight!</button>
+                    </div>
+                </>
+            }
         </div>
+
     </>
 }
