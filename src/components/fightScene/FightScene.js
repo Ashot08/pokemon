@@ -48,13 +48,13 @@ export const FightScene = (props) => {
     }
 
     useEffect(() => {
-        const offset = 0
+        const offset = 0;
         getPokemonUrls(offset, limit);
     }, [limit]);
 
     return <>
         <div className={classes.scene}>
-            {game.gameMode ? <Fighters /> : 'Выбери покемонов для боя'}
+            {game.gameMode ? <Fighters p1={player1.id} p2={player2.id} /> : 'Выбери покемонов для боя'}
         </div>
         <div>
 

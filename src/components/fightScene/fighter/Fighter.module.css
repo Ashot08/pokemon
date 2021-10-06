@@ -1,0 +1,9 @@
+.fighter{
+
+}
+.fighter__img{
+    width: 96px;
+}
+.fighter:first-child{
+    transform: scale(-1, 1);
+}
