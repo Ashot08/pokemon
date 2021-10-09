@@ -22,8 +22,10 @@ export const Pokemons = (props) => {
     },[props.currentPage]);
 
     useEffect(() => {
-        const offset = currentPage * limit
-        getPokemonUrls(offset, limit);
+        const offset = currentPage * limit;
+        let isMounted = true;
+        if(isMounted) getPokemonUrls(offset, limit);
+        return () => { isMounted = false };
     }, [currentPage]);
 
     return (

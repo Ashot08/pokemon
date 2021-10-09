@@ -3,16 +3,20 @@ import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {pokemonApi} from "../../../api/api";
 import {Preloader} from "../../common/Preloader";
+import {useAsync} from "../../../hooks/useAsync";
 export const Pokemon = (props) => {
     const [pokemon, setPokemon] = useState(0);
 
-    useEffect(() => {
-        pokemonApi.getPokemonByUrl(props.url).then(
-            data => {
-                setPokemon(data);
-            }
-        )
-    }, [props.url])
+    // useEffect(() => {
+    //     let isMounted = true;
+    //     pokemonApi.getPokemonByUrl(props.url).then(
+    //         data => {
+    //             if(isMounted) setPokemon(data);
+    //         }
+    //     );
+    //     return () => { isMounted = false };
+    // }, [props.url])
+    useAsync( pokemonApi.getPokemonByUrl, setPokemon, props.url);
     return (
         pokemon ?
         <Link to={`/card/${pokemon.id}`}>
