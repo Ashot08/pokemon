@@ -16,6 +16,7 @@ export const Pokemon = (props) => {
     //     );
     //     return () => { isMounted = false };
     // }, [props.url])
+
     useAsync( pokemonApi.getPokemonByUrl, setPokemon, props.url);
     return (
         pokemon ?
